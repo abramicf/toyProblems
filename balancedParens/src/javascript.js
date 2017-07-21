@@ -9,7 +9,6 @@ balancedParens = (string) => {
   };
 
   for (let char of string) {
-    //if opening
     if (openings.includes(char)) {
       storage.push(char);
     } else if (closings.includes(char)) {

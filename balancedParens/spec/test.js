@@ -85,7 +85,7 @@ describe('balancedParens', () => {
         }
       }
       return arr;
-      };
+    };
 
     let bubbleSortString = bubbleSort.toString();
 
