@@ -16,21 +16,26 @@
 //Third Pass
 longestString = (s) => {
   let arr = s.split('');
-  let longestString = '';
+  let longestStringLength = 0;
+  let storage = {};
+  let i = 0;
+  let j = 0;
+  let n = arr.length;
 
-  while (array.length > 0) {
-    //if the array length is greater than zero
-    for (let i = arr.length - 1; i >= 0; i--) {
-
+  while (i < n && j < n) {
+    let val = arr[j];
+    if (!storage[val]) {
+      storage[val] = true;
+      longestStringLength = Math.max(longestStringLength, j - i);
+      j++;
+    } else {
+      i++;
+      let closeVal = arr[i];
+      delete storage[closeVal];
     }
-    let popped = arr.pop();
+  }
 
-    //else loop through the current array
-    //at the end, do array.pop() and run the subroutine with the array again
-    //once it's
-  };
-
-  return longestString.length;
+  return longestStringLength;
 };
 
 //Second Pass
