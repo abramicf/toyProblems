@@ -4,7 +4,6 @@ class HashTable {
     this.storageLength = length;
   }
 
-  //need to 1. Hash and 2. Hash and map to an index.
   getHash(str, max) {
     let hash = 0;
     for (var i = 0; i < str.length; i++) {
@@ -16,38 +15,52 @@ class HashTable {
   }
 
   add(key, value) {
-    let bucket = this.getHash(key, this.storageLength);
-    let tuple = [key, value, bucket];
-    if (!this.storage[bucket]) {
-      this.storage[bucket] = [];
+    let bucketIndex = this.getHash(key, this.storageLength);
+    let tuple = [key, value, bucketIndex];
+
+    if (!this.storage[bucketIndex]) {
+      this.storage[bucketIndex] = [];
     }
 
-    this.storage[index].push(tuple);
+    for (let i = 0; i < this.storage[bucketIndex].length; i++) {
+      let item = this.storage[bucketIndex][i];
+      if (item[0] === key) {
+        item[1] = value;
+        this.showHash();
+        return;
+      }
+    }
+
+    this.storage[bucketIndex].push(tuple);
     console.log(tuple + ' has been added to hash!');
   }
 
-  find(key, value) {
-    let bucket = this.getHash(key, this.storageLength);
+  find(key) {
+    let bucketIndex = this.getHash(key, this.storageLength);
 
-    if (!this.storage[bucket]) {
+    if (!this.storage[bucketIndex]) {
       return 'Item not in hash table!';
-    };
-    this.storage[bucket].forEach((tuple) => {
-      if (tuple[0] === key && tuple[1] === value){
+    }
+
+    for (let i = 0; i < this.storage[bucketIndex].length; i++) {
+      let tuple = this.storage[bucketIndex][i];
+      if (tuple[0] === key) {
         return tuple;
       }
-    });
+    }
     return 'Item not in hash table!';
   }
-  remove(key, value) {
-    let bucket = this.getHash(key, this.storageLength);
 
-    if (!this.storage[bucket]) {
+  remove(key) {
+    let bucketIndex = this.getHash(key, this.storageLength);
+
+    if (!this.storage[bucketIndex]) {
       return 'Item not in hash table!';
-    };
-    this.storage[bucket].forEach((tuple, tupleIndex) => {
-      if (tuple[0] === key && tuple[1] === value) {
-        let eliminated = this.storage[bucket].splice(tupleIndex, 1);
+    }
+
+    this.storage[bucketIndex].forEach((tuple, tupleIndex) => {
+      if (tuple[0] === key) {
+        let eliminated = this.storage[bucketIndex].splice(tupleIndex, 1);
       }
     });
     this.showHash();
@@ -57,11 +70,11 @@ class HashTable {
     let result = 'this.storage = [';
     result += '\n';
 
-    this.storage.forEach((item, index) => {
-      result += '    bucket at index number ' + index + ' [';
-      item.forEach((innerItem, innerIndex) => {
-        result += '[' + innerItem[0] + ', ' + innerItem[1] + ', ' + innerItem[2] + ']';
-        if (innerIndex < item.length - 1) {
+    this.storage.forEach((bucket, bucketIndex) => {
+      result += '    bucket at index number ' + bucketIndex + ' [';
+      bucket.forEach((tuple, tupleIndex) => {
+        result += '[' + tuple[0] + ', ' + tuple[1] + ', ' + tuple[2] + ']';
+        if (tupleIndex < bucket.length - 1) {
           result += ', ';
         }
       });
@@ -70,7 +83,6 @@ class HashTable {
       result += '\n';
 
     });
-    result += '\n';
     result += ']';
     console.log(result);
   }
@@ -95,35 +107,28 @@ myHash.showHash();
 
 
 
-
-
-
-
-
-
-
 //STEP ONE:  CREATE HASH TABLE
 
-// class HashTable {
-//   constructor(length) {
-//     this.storage = [];
-//     this.storageLength = length;
-//   }
+class HashTable {
+  constructor(length) {
+    this.storage = [];
+    this.storageLength = length;
+  }
 
-//   getHash(key) {
+  getHash(key) {
 
-//   }
+  }
 
-//   add(key, value) {
+  add(key, value) {
 
-//   }
-//   find(key) {
+  }
+  find(key) {
 
-//   }
-//   remove(key) {
+  }
+  remove(key) {
 
-//   }
-  // showHash() {
+  }
+  showHash() {
 
-  // }
-// }
+  }
+}
