@@ -5,20 +5,19 @@ swap = (items, left, right) => {
   // return items;  //this return used for testing purposes
 };
 
-partition = (items, left, right) => { //[ 5, 6, 7, 4, 1, 2, 3 ], 0, 6
+partition = (items, left, right) => { //[ 3, 2, 7, 4, 1, 6, 5 ]
+  let pivot = Math.floor((left + right) / 2); //3
+  let i = left;  //2
+  let j = right; //4
 
-  let pivot = Math.floor((left + right) / 2);
-  let i = left;  //0
-  let j = right; //6
-
-  while (i <= pivot || j >= pivot) {
-    while (items[i] <= pivot) {
+      //2 < 3          4 > 3    true
+  while (i < pivot || j > pivot) {
+    while (items[i] <= items[pivot]) {  //items[2] = 7 and items[3] = 4.  Stop loop
       i++;
     }
-    while (items[j] >= pivot) {
+    while (items[j] >= items[pivot]) { //items[4] = 1 and items[3] = 4
       j--;
     }
-
     swap(items, i, j);
     i++;
     j--;
@@ -26,3 +25,5 @@ partition = (items, left, right) => { //[ 5, 6, 7, 4, 1, 2, 3 ], 0, 6
   }
   return items;
 };
+
+
