@@ -30,4 +30,17 @@ describe('Second Pass', () => {
     let result = containerWithMostWater(arr);
     result.should.eql([3, 7]);
   });
+
+  it('should work for [2, 3, 4, 5, 2, 2, 2, 3]', () => {
+    let arr = [2, 3, 4, 5, 2, 2, 2, 3];
+    let result = containerWithMostWater(arr);
+    result.should.eql([3, 7]);
+  });
+
+  it('should work for [2, 3, 4, 5, 10, 2, 2, 2, 3]', () => {
+    let arr = [2, 3, 4, 5, 10, 2, 2, 2, 3];
+    let result = containerWithMostWater(arr);
+    result.should.eql([3, 7]);
+  });
+
 });
