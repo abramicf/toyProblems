@@ -48,28 +48,49 @@ class Graph {
   removeEdge(vertex1, vertex2) {
     //if one or both verticies aren't in the graph
     if (!this.storage[vertex1] || !this.storage[vertex2]) {
-      return 'verticies not in this graph';
+      let message = 'verticies not in this graph';
+      console.log(message);
+      return message;
     }
 
     //if the edge doesn't exist
     if (!this.storage[vertex1].includes(vertex2) || !this.storage[vertex2].includes(vertex1)) {
-      return 'edge does not exist';
+      let message = 'edge does not exist';
+      console.log(message);
+      return message;
     }
 
     let edgeRemoved = [];
-    let firstRemoved = this.storage[vertex1].splice(vertex2);
+    // console.log(this.storage);
+    // console.log(this.storage[vertex2]);
+    let firstIndex = this.storage[vertex1].indexOf(vertex2);
+    let firstRemoved = this.storage[vertex1].splice(firstIndex, 1);
+    // console.log(firstRemoved);
     edgeRemoved.push(firstRemoved);
-    let secondRemoved = this.storage[vertex2].splice(vertex1);
+    let secondIndex = this.storage[vertex2].indexOf(vertex1);
+    let secondRemoved = this.storage[vertex2].splice(secondIndex, 1);
+    // console.log(secondRemoved);
     edgeRemoved.push(secondRemoved);
-    return edgeRemoved;
+    // console.log(edgeRemoved);
     //if the edge does exist
   }
 
+  printGraph() {
+    for (let prop in this.storage) {
+      console.log(prop + ' : ' + this.storage[prop]);
+    }
+  }
 }
 
+//traverse a graph!
+
+//you'd have to have an entry point
+//you'd have to
+
+//traverse a tree
 
 
-//works (get the stuff from the bottom)
+// works (get the stuff from the bottom)
 // depthFirstSearch = (root) => {
 //   let result = [];
 //   let subroutine = (node, depth) =>{
